@@ -1,4 +1,4 @@
-FROM gpii/universal
+FROM kaspermarkus/universal:review3
 
 COPY start.sh /usr/local/bin/start.sh
 
