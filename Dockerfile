@@ -1,4 +1,4 @@
-FROM kaspermarkus/universal:review3
+FROM kaspermarkus/universal
 
 COPY start.sh /usr/local/bin/start.sh
 
