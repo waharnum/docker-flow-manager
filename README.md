@@ -1,8 +1,6 @@
-## GPII Flow Manager Dockerfile
-
+<!-- ## GPII Flow Manager Dockerfile
 
 This repository is used to build [GPII Flow Manager](http://wiki.gpii.net/w/Architecture_Overview#Flow_Manager) Docker images.
-
 
 ### Environment Variables
 
@@ -10,11 +8,11 @@ The following environment variables can be used to affect the container's behavi
 
 * `NODE_ENV` - setting this variable is required and there is no default, one possible option is `cloudBased.production`
 
-* `PREFERENCES_SERVER_HOST_ADDRESS` - this is optional and defaults to `preferences.gpii.net` 
+* `PREFERENCES_SERVER_HOST_ADDRESS` - this is optional and defaults to `preferences.gpii.net`
 
-* `RBMM_HOST_ADDRESS` - this is optional and defaults to `rbmm.gpii.net` 
+* `RBMM_HOST_ADDRESS` - this is optional and defaults to `rbmm.gpii.net`
 
-* `STMM_HOST_ADDRESS` - this is optional and defaults to `stmm.gpii.net` 
+* `STMM_HOST_ADDRESS` - this is optional and defaults to `stmm.gpii.net`
 
 
 ### Port(s) Exposed
@@ -50,4 +48,10 @@ gpii/flow-manager
 
 ### Build your own image
 
-    docker build --rm=true -t <your name>/flow_manager .
+    docker build --rm=true -t <your name>/flow_manager . -->
+
+## Building
+
+## Running
+
+- `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.production -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 -t gpii/flow-manager`

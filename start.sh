@@ -1,27 +1,13 @@
 #!/bin/sh -e
 
-if [ -z "$NODE_ENV" ]; then
-    echo >&2 'Error: The NODE_ENV environment variable needs to be set'
-    exit 1
-fi
+# Create an Ansible variables file for run.yml based on environment variables passed to the container
 
-PREFERENCES_SERVER_HOST_ADDRESS=${PREFERENCES_SERVER_HOST_ADDRESS:-"preferences.gpii.net"}
-STMM_HOST_ADDRESS=${STMM_HOST_ADDRESS:-"stmm.gpii.net"}
-RBMM_HOST_ADDRESS=${RBMM_HOST_ADDRESS:-"rbmm.gpii.net"}
-
-sed -i "s/preferences.gpii.net/${PREFERENCES_SERVER_HOST_ADDRESS}/g" /opt/universal/gpii/configs/cloudBased.production.json
-sed -i "s/stmm.gpii.net/${STMM_HOST_ADDRESS}/g" /opt/universal/gpii/configs/cloudBased.production.json
-sed -i "s/rbmm.gpii.net/${RBMM_HOST_ADDRESS}/g" /opt/universal/gpii/configs/cloudBased.production.json
-
-cat >/etc/supervisord.d/flow_manager.ini<<EOF
-[program:flow_manager]
-command=node /opt/universal/gpii.js
-environment=NODE_ENV="${NODE_ENV}"
-user=nobody
-autorestart=true
-redirect_stderr=true
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
+cat > runtime_vars.yml<<EOF
+---
+gpii_flow_manager_preferences_server_host_address: $PREFERENCES_SERVER_HOST_ADDRESS
+gpii_flow_manager_environment: $NODE_ENV
+gpii_flow_manager_rbmm_host_address: $RBMM_HOST_ADDRESS
+gpii_flow_manager_stmm_host_address: $STMM_HOST_ADDRESS
 EOF
 
-supervisord -c /etc/supervisord.conf
+ansible-playbook run.yml --tags "deploy" && supervisord -n -c /etc/supervisord.conf
