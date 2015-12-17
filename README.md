@@ -52,6 +52,8 @@ gpii/flow-manager
 
 ## Building
 
+- `docker build --no-cache -t gpii/flow-manager .`
+
 ## Running
 
 - `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.production -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 -t gpii/flow-manager`
