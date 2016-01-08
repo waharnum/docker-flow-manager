@@ -9,8 +9,8 @@ Builds a GPII Preferences Server Docker container image. This image is built usi
 
 ## Runtime Environment Variables
 
-`PREFERENCES_SERVER_HOST_ADDRESS`: host address of the preferences server instance to use. (default: `preferences.gpii.net`)
-`NODE_ENV`: specifies the configuration file to be used from https://github.com/GPII/universal/tree/master/gpii/configs when launching (default: `cloudBased.production`)
+- `PREFERENCES_SERVER_HOST_ADDRESS`: host address of the preferences server instance to use. (default: `preferences.gpii.net`)
+- `NODE_ENV`: specifies the configuration file to be used from https://github.com/GPII/universal/tree/master/gpii/configs when launching (default: `cloudBased.production`)
 - `CONTAINER_TEST`: whether or not to run the container in test mode, then exit (default: `false`)
 
 ## Testing
