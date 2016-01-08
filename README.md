@@ -4,8 +4,8 @@ Builds a GPII Flow Manager Docker container image. This image is built using the
 
 ## Building
 
-- Build Ansible-provisioned image:
-  - `docker build --no-cache -t gpii/flow-manager .`
+Build Ansible-provisioned image:
+- `docker build --no-cache -t gpii/flow-manager .`
 
 ## Runtime Environment Variables
 
@@ -21,7 +21,7 @@ This mode is typically expected to connect to a running Preferences Server with 
 
 ## Running
 
-- running requires a preferences server instance accessible to the container. As in the example below, this can be a self-contained preferences server running in the same container in development mode.
+A Preferences Server instance will need to be accessible to the Flow Manager container. As in the example below, this can be a self-contained Preferences Server running in the same container in development mode
 
 ### Run Examples
 
