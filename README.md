@@ -4,7 +4,7 @@ Builds a GPII Flow Manager Docker container image. This image is built using the
 
 ## Building
 
-- build Ansible-provisioned image:
+- Build Ansible-provisioned image:
   - `docker build --no-cache -t gpii/flow-manager .`
 
 ## Runtime Environment Variables
