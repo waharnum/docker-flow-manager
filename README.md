@@ -9,7 +9,7 @@ Build Ansible-provisioned image:
 
 ## Runtime Environment Variables
 
-- `PREFERENCES_SERVER_HOST_ADDRESS`: host address of the preferences server instance to use. (default: `preferences.gpii.net`)
+- `PREFERENCES_SERVER_HOST_ADDRESS`: host address of the Preferences Server instance to use. (default: `preferences.gpii.net`)
 - `NODE_ENV`: specifies the configuration file to be used from https://github.com/GPII/universal/tree/master/gpii/configs when launching (default: `cloudBased.production`)
 - `CONTAINER_TEST`: whether or not to run the container in test mode, then exit (default: `false`)
 
@@ -25,18 +25,54 @@ A Preferences Server instance will need to be accessible to the Flow Manager con
 
 ### Run Examples
 
-#### Connecting to a separate preferences server in another container
+#### Connecting to a separate Preferences Server in another container
 
-- `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.production -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 gpii/flow-manager`
+```
+docker run \
+--name flowmanager \
+-d \
+-p 8081:8081 \
+-l prefserver \
+-e NODE_ENV=cloudBased.production \
+-e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 \
+gpii/flow-manager
+```
 
-#### In test mode, connecting to a separate preferences server in another container
+#### In test mode, connecting to a separate Preferences Server in another container
 
-- `docker run --name flowmanagertest -t --rm -e NODE_ENV=cloudBased.production -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 -e CONTAINER_TEST=true -t gpii/flow-manager`
+```
+docker run \
+--name flowmanagertest \
+-t \
+--rm \
+-e NODE_ENV=cloudBased.production \
+-e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 \
+-e CONTAINER_TEST=true \
+gpii/flow-manager
+```
 
-### With a self-contained preferences server running in the same container(development mode)
+### With a self-contained Preferences Server running in the same container (development mode)
 
-- `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.development.all.local -e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 -t gpii/flow-manager`
+```
+docker run \
+--name flowmanager \
+-d \
+-p 8081:8081 \
+-l prefserver \
+-e NODE_ENV=cloudBased.development.all.local \
+-e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 \
+gpii/flow-manager
+```
 
-### In test mode, connecting to its own self-contained preferences server
+### In test mode, connecting to its own self-contained Preferences Server
 
-- `docker run --name flowmanagertest -t --rm -e NODE_ENV=cloudBased.development.all.local -e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 -e CONTAINER_TEST=true -t gpii/flow-manager`
+```
+docker run \
+--name flowmanagertest \
+-t \
+--rm \
+-e NODE_ENV=cloudBased.development.all.local \
+-e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 \
+-e CONTAINER_TEST=true \
+gpii/flow-manager
+```
