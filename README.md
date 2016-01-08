@@ -1,59 +1,38 @@
-<!-- ## GPII Flow Manager Dockerfile
+# GPII Flow Manager Dockerfile - Ansible version
 
-This repository is used to build [GPII Flow Manager](http://wiki.gpii.net/w/Architecture_Overview#Flow_Manager) Docker images.
-
-### Environment Variables
-
-The following environment variables can be used to affect the container's behaviour:
-
-* `NODE_ENV` - setting this variable is required and there is no default, one possible option is `cloudBased.production`
-
-* `PREFERENCES_SERVER_HOST_ADDRESS` - this is optional and defaults to `preferences.gpii.net`
-
-* `RBMM_HOST_ADDRESS` - this is optional and defaults to `rbmm.gpii.net`
-
-* `STMM_HOST_ADDRESS` - this is optional and defaults to `stmm.gpii.net`
-
-
-### Port(s) Exposed
-
-* `8081 TCP`
-
-
-### Base Docker Image
-
-* [gpii/universal](https://github.com/gpii-ops/docker-universal/)
-
-
-### Download
-
-    docker pull gpii/flow-manager
-
-
-#### Run `flow_manager`
-
-If your Preferences Server instance uses a `10.0.2.15` IP address and `8082` TCP port you could start a container like this:
-
-```
-docker run \
--d \
---rm=true \
---name="flow_manager" \
--p 8081:8081 \
--e NODE_ENV="cloudBased.production" \
--e PREFERENCES_SERVER_HOST_ADDRESS="10.0.2.15:8082" \
-gpii/flow-manager
-```
-
-
-### Build your own image
-
-    docker build --rm=true -t <your name>/flow_manager . -->
+Builds a GPII Preferences Server Docker container image. This image is built using the [Ansible role](https://github.com/gpii-ops/ansible-flow-manager).
 
 ## Building
 
-- `docker build --no-cache -t gpii/flow-manager .`
+- build Ansible-provisioned image:
+  - `docker build --no-cache -t gpii/flow-manager .`
+
+## Runtime Environment Variables
+
+`PREFERENCES_SERVER_HOST_ADDRESS`: host address of the preferences server instance to use. (default: `preferences.gpii.net`)
+`NODE_ENV`: specifies the configuration file to be used from https://github.com/GPII/universal/tree/master/gpii/configs when launching (default: `cloudBased.production`)
+- `CONTAINER_TEST`: whether or not to run the container in test mode, then exit (default: `false`)
+
+## Testing
+
+The container can be tested as part of a GPII deployment by setting the *CONTAINER_TEST* environment variable to *true*.
+
+This mode is expected to connect to a running preferences server with the 'Carla' test data set. The container will exit after the test and the exit code as a reuslt of the run command can be used for further actions.
 
 ## Running
 
-- `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.production -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 -t gpii/flow-manager`
+- running requires a preferences server instance accessible to the container. As in the example below, this can be a self-contained preferences server running in the same container in development mode.
+
+### Run Examples
+
+#### Connecting to a separate preferences server in another container
+
+- `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.production -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 gpii/flow-manager`
+
+### With a self-contained preferences server running in the same container(development mode)
+
+- `docker run --name flowmanager -d -p 8081:8081 -l prefserver -e NODE_ENV=cloudBased.development.all.local -e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 -t gpii/flow-manager`
+
+### In test mode, connecting to its own self-contained preferences server
+
+- `docker run --name flowmanagertest -t --rm -e NODE_ENV=cloudBased.development.all.local -e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 -e CONTAINER_TEST=true -t gpii/flow-manager`
