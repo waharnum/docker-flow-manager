@@ -1,6 +1,6 @@
 # GPII Flow Manager Dockerfile - Ansible version
 
-Builds a GPII Preferences Server Docker container image. This image is built using the [Ansible role](https://github.com/gpii-ops/ansible-flow-manager).
+Builds a GPII Flow Manager Docker container image. This image is built using the [Ansible role](https://github.com/gpii-ops/ansible-flow-manager).
 
 ## Building
 
@@ -17,7 +17,7 @@ Builds a GPII Preferences Server Docker container image. This image is built usi
 
 The container can be tested as part of a GPII deployment by setting the *CONTAINER_TEST* environment variable to *true*.
 
-This mode is typically expected to connect to a running preferences server with the 'Carla' test data set. The container will exit after the test and the exit code as a reuslt of the run command can be used for further actions. The container can (to a certain extent) self-test using the development mode - see the run examples below - but this obviously doesn't test the real production runtime configuration.
+This mode is typically expected to connect to a running Preferences Server with the 'Carla' test preference set. The container will exit after the test and the exit code as a result of the run command can be used for further actions. The container can (to a certain extent) self-test using the development mode - see the run examples below - but this doesn't test the real production run-time configuration
 
 ## Running
 
