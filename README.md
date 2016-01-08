@@ -17,7 +17,7 @@ Builds a GPII Preferences Server Docker container image. This image is built usi
 
 The container can be tested as part of a GPII deployment by setting the *CONTAINER_TEST* environment variable to *true*.
 
-This mode is expected to connect to a running preferences server with the 'Carla' test data set. The container will exit after the test and the exit code as a reuslt of the run command can be used for further actions.
+This mode is typically expected to connect to a running preferences server with the 'Carla' test data set. The container will exit after the test and the exit code as a reuslt of the run command can be used for further actions. The container can (to a certain extent) self-test using the development mode - see the run examples below - but this obviously doesn't test the real production runtime configuration.
 
 ## Running
 
