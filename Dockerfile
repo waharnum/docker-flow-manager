@@ -1,4 +1,4 @@
-FROM gpii/universal:GPII-1245
+FROM gpii/universal
 
 WORKDIR /etc/ansible/playbooks
 
