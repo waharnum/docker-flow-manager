@@ -1,8 +1,8 @@
 # Uses environment variables passed to the container on `docker run`
 ---
 
-gpii_flow_manager_preferences_server_host_address: "{{ lookup('env', 'PREFERENCES_SERVER_HOST_ADDRESS') | default('localhost:8082',true) }}"
-gpii_flow_manager_environment: "{{ lookup('env', 'NODE_ENV') | default('cloudBased.production',true) }}"
+flow_manager_preferences_server_host_address: "{{ lookup('env', 'PREFERENCES_SERVER_HOST_ADDRESS') | default('localhost:8082',true) }}"
+flow_manager_environment: "{{ lookup('env', 'NODE_ENV') | default('cloudBased.production',true) }}"
 
 # self-test configuration for CONTAINER_TEST mode
 nodejs_app_host_address: 127.0.0.1
