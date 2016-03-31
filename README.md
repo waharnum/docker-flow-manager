@@ -32,7 +32,7 @@ docker run \
 --name flowmanager \
 -d \
 -p 8081:8081 \
--l prefserver \
+--link prefserver \
 -e NODE_ENV=cloudBased.production \
 -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 \
 gpii/flow-manager
@@ -45,6 +45,7 @@ docker run \
 --name flowmanagertest \
 -t \
 --rm \
+--link prefserver \
 -e NODE_ENV=cloudBased.production \
 -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 \
 -e CONTAINER_TEST=true \
@@ -58,7 +59,6 @@ docker run \
 --name flowmanager \
 -d \
 -p 8081:8081 \
--l prefserver \
 -e NODE_ENV=cloudBased.development.all.local \
 -e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 \
 gpii/flow-manager
