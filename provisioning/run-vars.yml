@@ -4,6 +4,10 @@
 flow_manager_preferences_server_host_address: "{{ lookup('env', 'PREFERENCES_SERVER_HOST_ADDRESS') | default('localhost:8082',true) }}"
 flow_manager_environment: "{{ lookup('env', 'NODE_ENV') | default('cloudBased.production',true) }}"
 
+# Although this has been already specified in the GPII/universal, it's needed here for the deploy phase again.
+nodejs_app_name: universal
+nodejs_app_start_script: gpii.js
+
 # self-test configuration for CONTAINER_TEST mode
 nodejs_app_host_address: 127.0.0.1
 nodejs_app_tcp_port: 8081
