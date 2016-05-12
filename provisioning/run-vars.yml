@@ -5,6 +5,7 @@ flow_manager_preferences_server_host_address: "{{ lookup('env', 'PREFERENCES_SER
 flow_manager_environment: "{{ lookup('env', 'NODE_ENV') | default('cloudBased.production',true) }}"
 
 # Although this has been already specified in the GPII/universal, it's needed here for the deploy phase again.
+nodejs_app_name: universal
 nodejs_app_start_script: gpii.js
 
 # self-test configuration for CONTAINER_TEST mode
