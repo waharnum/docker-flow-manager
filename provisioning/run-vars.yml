@@ -2,7 +2,9 @@
 ---
 
 flow_manager_preferences_server_host_address: "{{ lookup('env', 'PREFERENCES_SERVER_HOST_ADDRESS') | default('localhost:8082',true) }}"
-flow_manager_environment: "{{ lookup('env', 'NODE_ENV') | default('cloudBased.production',true) }}"
+flow_manager_environment: "{{ lookup('env', 'NODE_ENV') | default('gpii.config.cloudBased.flowManager.production',true) }}"
+
+flow_manager_development_dataStore_baseUrl: "{{ lookup('env', 'DEVELOPMENT_DATASTORE_BASEURL') | default('localhost',true) }}"
 
 # Although this has been already specified in the GPII/universal, it's needed here for the deploy phase again.
 nodejs_app_name: universal

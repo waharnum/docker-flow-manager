@@ -10,7 +10,7 @@ Build Ansible-provisioned image:
 ## Runtime Environment Variables
 
 - `PREFERENCES_SERVER_HOST_ADDRESS`: host address of the Preferences Server instance to use. (default: `preferences.gpii.net`)
-- `NODE_ENV`: specifies the configuration file to be used from https://github.com/GPII/universal/tree/master/gpii/configs when launching (default: `cloudBased.production`)
+- `NODE_ENV`: specifies the configuration file to be used from https://github.com/GPII/universal/tree/master/gpii/configs when launching (default: `gpii.config.cloudBased.flowManager.production`)
 - `CONTAINER_TEST`: whether or not to run the container in test mode, then exit (default: `false`)
 
 ## Testing
@@ -31,10 +31,12 @@ A Preferences Server instance will need to be accessible to the Flow Manager con
 docker run \
 --name flowmanager \
 -d \
--p 8081:8081 \
+-p 8082:8082 \
 --link prefserver \
--e NODE_ENV=cloudBased.production \
--e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 \
+--link couchdb \
+-e DEVELOPMENT_DATASTORE_BASEURL=couchdb
+-e NODE_ENV=gpii.config.cloudBased.flowManager.production \
+-e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8081 \
 gpii/flow-manager
 ```
 
@@ -46,8 +48,10 @@ docker run \
 -t \
 --rm \
 --link prefserver \
--e NODE_ENV=cloudBased.production \
--e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8082 \
+--link couchdb \
+-e DEVELOPMENT_DATASTORE_BASEURL=couchdb
+-e NODE_ENV=gpii.config.cloudBased.flowManager.production \
+-e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8081 \
 -e CONTAINER_TEST=true \
 gpii/flow-manager
 ```
@@ -58,9 +62,9 @@ gpii/flow-manager
 docker run \
 --name flowmanager \
 -d \
--p 8081:8081 \
+-p 8082:8082 \
 -e NODE_ENV=cloudBased.development.all.local \
--e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 \
+-e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8082 \
 gpii/flow-manager
 ```
 
@@ -72,7 +76,7 @@ docker run \
 -t \
 --rm \
 -e NODE_ENV=cloudBased.development.all.local \
--e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8081 \
+-e PREFERENCES_SERVER_HOST_ADDRESS=localhost:8082 \
 -e CONTAINER_TEST=true \
 gpii/flow-manager
 ```

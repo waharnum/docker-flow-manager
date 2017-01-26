@@ -12,6 +12,6 @@ COPY provisioning/start.sh /usr/local/bin/start.sh
 
 RUN chmod 755 /usr/local/bin/start.sh
 
-EXPOSE 8081
+EXPOSE 8082
 
-ENTRYPOINT ["/usr/local/bin/start.sh"]
+CMD ["/usr/local/bin/start.sh"]
