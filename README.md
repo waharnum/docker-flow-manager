@@ -34,7 +34,7 @@ docker run \
 -p 8082:8082 \
 --link prefserver \
 --link couchdb \
--e DEVELOPMENT_DATASTORE_BASEURL=couchdb
+-e DEVELOPMENT_DATASTORE_BASEURL=couchdb \
 -e NODE_ENV=gpii.config.cloudBased.flowManager.production \
 -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8081 \
 gpii/flow-manager
@@ -49,7 +49,7 @@ docker run \
 --rm \
 --link prefserver \
 --link couchdb \
--e DEVELOPMENT_DATASTORE_BASEURL=couchdb
+-e DEVELOPMENT_DATASTORE_BASEURL=couchdb \
 -e NODE_ENV=gpii.config.cloudBased.flowManager.production \
 -e PREFERENCES_SERVER_HOST_ADDRESS=prefserver:8081 \
 -e CONTAINER_TEST=true \
